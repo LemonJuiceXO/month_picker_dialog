@@ -67,7 +67,7 @@ extension DateStringExtensions on String {
         "نوفمبر", // November
         "ديسمبر" // December
       ];
-  String get formatArabicNumbers {
+  String get formatArabicNumbersAndMonths {
     String formatedString = this;
 
     for (int i = 0; i < easternArabicNumbers.length; i++) {
@@ -75,6 +75,20 @@ extension DateStringExtensions on String {
       final westernNum = westernArabicNumbers[i];
       formatedString = formatedString.replaceAll(easternNum, westernNum);
     }
+
+    for (int i = 0; i < arabicMonths.length; i++) {
+      final arabicMonth = arabicMonths[i];
+      final algerianArabicMonth = algerianMonthsArabic[i];
+      formatedString = formatedString.replaceAll(arabicMonth, algerianArabicMonth);
+    }
+
+    print(formatedString);
+
+    return formatedString;
+  }
+
+  String get formatArabicMonths {
+    String formatedString = this;
 
     for (int i = 0; i < arabicMonths.length; i++) {
       final arabicMonth = arabicMonths[i];

@@ -35,6 +35,7 @@ void main() => runApp(
             ),
           ),
         ),
+        locale: Locale('ar'),
         home: MyApp(
           initialDate: DateTime.now(),
         ),
@@ -62,62 +63,19 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> monthPicker(BuildContext contexto) async {
-    return showMonthPicker(
-      context: contexto,
-      firstDate: DateTime(DateTime.now().year - 5, 5),
-      lastDate: DateTime(DateTime.now().year + 8, 9),
-      initialDate: selectedDate ?? widget.initialDate,
-      selectableMonthPredicate: (DateTime val) => val.month.isEven,
-      selectableYearPredicate: (int year) => year.isEven,
-      monthStylePredicate: (DateTime val) {
-        if (val.month == 4) {
-          return TextButton.styleFrom(
-            backgroundColor: Colors.yellow[700],
-            textStyle: const TextStyle(
-              color: Colors.pink,
-              fontWeight: FontWeight.bold,
-            ),
-          );
-        }
-        return null;
-      },
-      yearStylePredicate: (int val) {
-        if (val == 2022) {
-          return TextButton.styleFrom(
-            backgroundColor: Colors.yellow[700],
-            textStyle: const TextStyle(
-              color: Colors.pink,
-              fontWeight: FontWeight.bold,
-            ),
-          );
-        }
-        return null;
-      },
+    return await showMonthPicker(
       monthPickerDialogSettings: MonthPickerDialogSettings(
-        dialogSettings: const PickerDialogSettings(verticalScrolling: false),
-        headerSettings: const PickerHeaderSettings(
-          headerCurrentPageTextStyle:
-              TextStyle(fontSize: 14, color: Colors.black),
-          headerSelectedIntervalTextStyle: TextStyle(fontSize: 16),
-          headerIconsColor: Colors.white,
+        actionBarSettings: PickerActionBarSettings(),
+        dialogSettings: PickerDialogSettings(
+          forcePortrait: true,
         ),
-        actionBarSettings: PickerActionBarSettings(
-          confirmWidget: Text(
-            'This one!',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.indigo[300],
-            ),
-          ),
-          cancelWidget: Text(
-            'Cancel',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.red[900],
-            ),
-          ),
-        ),
+        dateButtonsSettings: PickerDateButtonsSettings(),
       ),
+      initialDate: DateTime.now(),
+      onMonthSelected: (date) {},
+      context: context,
+      firstDate: DateTime(1999),
+      lastDate: DateTime(2100),
     ).then((DateTime? date) {
       if (date != null) {
         setState(() {
@@ -151,10 +109,8 @@ class _MyAppState extends State<MyApp> {
       returnToStartofRange: true,
       firstDate: DateTime(DateTime.now().year - 5, 5),
       lastDate: DateTime(DateTime.now().year + 8, 9),
-      initialRangeDate:
-          rangeDates.firstOrNull ?? DateTime(DateTime.now().year - 1, 5),
-      endRangeDate:
-          rangeDates.lastOrNull ?? DateTime(DateTime.now().year - 1, 7),
+      initialRangeDate: rangeDates.firstOrNull ?? DateTime(DateTime.now().year - 1, 5),
+      endRangeDate: rangeDates.lastOrNull ?? DateTime(DateTime.now().year - 1, 7),
       headerTitle: const Text('Month Picker Dialog'),
       monthPickerDialogSettings: MonthPickerDialogSettings(
         dialogSettings: PickerDialogSettings(

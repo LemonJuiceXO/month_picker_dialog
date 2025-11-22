@@ -23,62 +23,53 @@ class HeaderRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle? headline5 = controller.monthPickerDialogSettings
-            .headerSettings.headerCurrentPageTextStyle ??
-        theme.primaryTextTheme.headlineSmall;
-    final Color? arrowcolors =
-        controller.monthPickerDialogSettings.headerSettings.headerIconsColor ??
-            (controller.monthPickerDialogSettings.headerSettings
-                    .headerCurrentPageTextStyle?.color ??
-                theme.primaryIconTheme.color);
+    final TextStyle? headline5 =
+        controller.monthPickerDialogSettings.headerSettings.headerCurrentPageTextStyle ??
+            theme.primaryTextTheme.headlineSmall;
+    final Color? arrowcolors = controller
+            .monthPickerDialogSettings.headerSettings.headerIconsColor ??
+        (controller.monthPickerDialogSettings.headerSettings.headerCurrentPageTextStyle?.color ??
+            theme.primaryIconTheme.color);
 
-    final TextScaler? scaler =
-        controller.monthPickerDialogSettings.dialogSettings.textScaleFactor !=
-                null
-            ? TextScaler.linear(controller
-                .monthPickerDialogSettings.dialogSettings.textScaleFactor!)
-            : null;
+    final TextScaler? scaler = controller
+                .monthPickerDialogSettings.dialogSettings.textScaleFactor !=
+            null
+        ? TextScaler.linear(controller.monthPickerDialogSettings.dialogSettings.textScaleFactor!)
+        : null;
 
-    final YearUpDownPageProvider yearProvider =
-        Provider.of<YearUpDownPageProvider>(context);
-    final MonthUpDownPageProvider monthProvider =
-        Provider.of<MonthUpDownPageProvider>(context);
+    final YearUpDownPageProvider yearProvider = Provider.of<YearUpDownPageProvider>(context);
+    final MonthUpDownPageProvider monthProvider = Provider.of<MonthUpDownPageProvider>(context);
     final List<Widget> mainWidgets = isMonthSelector
         ? <Widget>[
             TextButton(
               onPressed: onSelectYear,
               style: const ButtonStyle(
                 visualDensity: VisualDensity.compact,
-                padding: WidgetStatePropertyAll(
-                    EdgeInsets.symmetric(horizontal: 12, vertical: 4)),
+                padding: WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 12, vertical: 4)),
                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 minimumSize: WidgetStatePropertyAll(Size(0, 0)),
               ),
               child: Text(
                 DateFormat.y(localeString)
-                    .format(DateTime(monthProvider.pageLimit.upLimit)),
+                    .format(DateTime(monthProvider.pageLimit.upLimit))
+                    .formatArabicNumbersAndMonths,
                 style: headline5,
                 textScaler: scaler,
               ),
             ),
-            if (!controller
-                .monthPickerDialogSettings.headerSettings.hideHeaderArrows)
+            if (!controller.monthPickerDialogSettings.headerSettings.hideHeaderArrows)
               HeaderArrows(
                 arrowcolors: arrowcolors,
                 onUpButtonPressed: controller.onUpButtonPressed,
                 onDownButtonPressed: controller.onDownButtonPressed,
                 downState: monthProvider.enableState.downState,
                 upState: monthProvider.enableState.upState,
-                arrowSize: controller
-                    .monthPickerDialogSettings.headerSettings.headerIconsSize,
-                previousIcon: controller
-                    .monthPickerDialogSettings.headerSettings.previousIcon,
-                nextIcon: controller
-                    .monthPickerDialogSettings.headerSettings.nextIcon,
-                arrowAlpha: controller
-                    .monthPickerDialogSettings.headerSettings.arrowAlpha,
-                verticalScrolling: controller
-                    .monthPickerDialogSettings.dialogSettings.verticalScrolling,
+                arrowSize: controller.monthPickerDialogSettings.headerSettings.headerIconsSize,
+                previousIcon: controller.monthPickerDialogSettings.headerSettings.previousIcon,
+                nextIcon: controller.monthPickerDialogSettings.headerSettings.nextIcon,
+                arrowAlpha: controller.monthPickerDialogSettings.headerSettings.arrowAlpha,
+                verticalScrolling:
+                    controller.monthPickerDialogSettings.dialogSettings.verticalScrolling,
               ),
           ]
         : <Widget>[
@@ -87,7 +78,8 @@ class HeaderRow extends StatelessWidget {
               children: <Widget>[
                 Text(
                   DateFormat.y(localeString)
-                      .format(DateTime(yearProvider.pageLimit.upLimit)),
+                      .format(DateTime(yearProvider.pageLimit.upLimit))
+                      .formatArabicNumbersAndMonths,
                   style: headline5,
                   textScaler: scaler,
                 ),
@@ -98,30 +90,26 @@ class HeaderRow extends StatelessWidget {
                 ),
                 Text(
                   DateFormat.y(localeString)
-                      .format(DateTime(yearProvider.pageLimit.downLimit)),
+                      .format(DateTime(yearProvider.pageLimit.downLimit))
+                      .formatArabicNumbersAndMonths,
                   style: headline5,
                   textScaler: scaler,
                 ),
               ],
             ),
-            if (!controller
-                .monthPickerDialogSettings.headerSettings.hideHeaderArrows)
+            if (!controller.monthPickerDialogSettings.headerSettings.hideHeaderArrows)
               HeaderArrows(
                 arrowcolors: arrowcolors,
                 onUpButtonPressed: controller.onUpButtonPressed,
                 onDownButtonPressed: controller.onDownButtonPressed,
                 downState: yearProvider.enableState.downState,
                 upState: yearProvider.enableState.upState,
-                arrowSize: controller
-                    .monthPickerDialogSettings.headerSettings.headerIconsSize,
-                previousIcon: controller
-                    .monthPickerDialogSettings.headerSettings.previousIcon,
-                nextIcon: controller
-                    .monthPickerDialogSettings.headerSettings.nextIcon,
-                arrowAlpha: controller
-                    .monthPickerDialogSettings.headerSettings.arrowAlpha,
-                verticalScrolling: controller
-                    .monthPickerDialogSettings.dialogSettings.verticalScrolling,
+                arrowSize: controller.monthPickerDialogSettings.headerSettings.headerIconsSize,
+                previousIcon: controller.monthPickerDialogSettings.headerSettings.previousIcon,
+                nextIcon: controller.monthPickerDialogSettings.headerSettings.nextIcon,
+                arrowAlpha: controller.monthPickerDialogSettings.headerSettings.arrowAlpha,
+                verticalScrolling:
+                    controller.monthPickerDialogSettings.dialogSettings.verticalScrolling,
               ),
           ];
     return portrait

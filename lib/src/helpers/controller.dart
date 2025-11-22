@@ -242,22 +242,25 @@ class MonthpickerController {
     if (!rangeMode) {
       if (!onlyYear) {
         if (monthPickerDialogSettings.dialogSettings.capitalizeFirstLetter) {
-          return '${toBeginningOfSentenceCase(DateFormat.yMMM(localeString).format(selectedDate).formatArabicNumbers)}';
+          return '${toBeginningOfSentenceCase(DateFormat.yMMM(localeString).format(selectedDate).formatArabicNumbersAndMonths)}';
         }
-        return DateFormat.yMMM(localeString).format(selectedDate).formatArabicNumbers.toLowerCase();
+        return DateFormat.yMMM(localeString)
+            .format(selectedDate)
+            .toLowerCase()
+            .formatArabicNumbersAndMonths;
       } else {
-        return DateFormat.y(localeString).format(selectedDate).formatArabicNumbers;
+        return DateFormat.y(localeString).format(selectedDate).formatArabicNumbersAndMonths;
       }
     } else {
       String rangeDateString = "";
       if (initialRangeDate != null) {
         if (monthPickerDialogSettings.dialogSettings.capitalizeFirstLetter) {
           rangeDateString =
-              '${toBeginningOfSentenceCase(DateFormat.yMMM(localeString).format(initialRangeDate!).formatArabicNumbers)}';
+              '${toBeginningOfSentenceCase(DateFormat.yMMM(localeString).format(initialRangeDate!).formatArabicNumbersAndMonths)}';
         } else {
           rangeDateString = DateFormat.yMMM(localeString)
               .format(initialRangeDate!)
-              .formatArabicNumbers
+              .formatArabicNumbersAndMonths
               .toLowerCase();
         }
       }
@@ -265,10 +268,10 @@ class MonthpickerController {
       if (endRangeDate != null) {
         if (monthPickerDialogSettings.dialogSettings.capitalizeFirstLetter) {
           rangeDateString +=
-              ' - ${toBeginningOfSentenceCase(DateFormat.yMMM(localeString).format(endRangeDate!)).formatArabicNumbers}';
+              ' - ${toBeginningOfSentenceCase(DateFormat.yMMM(localeString).format(endRangeDate!)).formatArabicNumbersAndMonths}';
         } else {
           rangeDateString +=
-              ' - ${DateFormat.yMMM(localeString).format(initialRangeDate!).toLowerCase().formatArabicNumbers}';
+              ' - ${DateFormat.yMMM(localeString).format(initialRangeDate!).toLowerCase().formatArabicNumbersAndMonths}';
         }
       }
       return rangeDateString;
