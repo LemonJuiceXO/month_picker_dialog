@@ -3,10 +3,8 @@ import 'package:flutter/widgets.dart';
 // Function to create the locale string, including scriptCode if available
 String createLocaleString(Locale locale) {
   final languageCode = locale.languageCode;
-  final scriptCode =
-      locale.scriptCode ?? ''; // Default to empty if scriptCode is null
-  final countryCode =
-      locale.countryCode ?? ''; // Default to empty if countryCode is null
+  final scriptCode = locale.scriptCode ?? ''; // Default to empty if scriptCode is null
+  final countryCode = locale.countryCode ?? ''; // Default to empty if countryCode is null
 
   if (scriptCode.isNotEmpty && countryCode.isNotEmpty) {
     return '${languageCode}_${scriptCode}_$countryCode';

@@ -32,3 +32,58 @@ extension NullableDateTimeExtension on DateTime? {
     }
   }
 }
+
+extension DateStringExtensions on String {
+  List<String> get westernArabicNumbers => ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+
+  List<String> get easternArabicNumbers => ["٠", "١", "٢", "٣", "٤", "٥", "٦", "٧", "٨", "٩"];
+
+  List<String> get algerianMonthsArabic => [
+        "جانفي", // January
+        "فيفري", // February
+        "مارس", // March
+        "أفريل", // April
+        "ماي", // May
+        "جوان", // June
+        "جويلية", // July
+        "أوت", // August
+        "سبتمبر", // September
+        "أكتوبر", // October
+        "نوفمبر", // November
+        "ديسمبر" // December
+      ];
+
+  List<String> get arabicMonths => [
+        "يناير", // January
+        "فبراير", // February
+        "مارس", // March
+        "أبريل", // April
+        "مايو", // May
+        "يونيو", // June
+        "يوليو", // July
+        "أغسطس", // August
+        "سبتمبر", // September
+        "أكتوبر", // October
+        "نوفمبر", // November
+        "ديسمبر" // December
+      ];
+  String get formatArabicNumbers {
+    String formatedString = this;
+
+    for (int i = 0; i < easternArabicNumbers.length; i++) {
+      final easternNum = easternArabicNumbers[i];
+      final westernNum = westernArabicNumbers[i];
+      formatedString = formatedString.replaceAll(easternNum, westernNum);
+    }
+
+    for (int i = 0; i < arabicMonths.length; i++) {
+      final arabicMonth = arabicMonths[i];
+      final algerianArabicMonth = algerianMonthsArabic[i];
+      formatedString = formatedString.replaceAll(arabicMonth, algerianArabicMonth);
+    }
+
+    print(formatedString);
+
+    return formatedString;
+  }
+}
